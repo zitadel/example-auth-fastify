@@ -123,9 +123,19 @@ export async function build() {
 
       const logoutUrl = strategy.getLogoutUrl({
         id_token_hint: user?.id_token,
+        logout_hint: user.sub,
       });
 
       reply.redirect(logoutUrl);
+    },
+  );
+
+  app.get(
+    '/logout/callback',
+    async (_req: FastifyRequest, reply: FastifyReply): Promise<void> => {
+      await reply.view('loggedout.hbs', {
+        //
+      });
     },
   );
 
