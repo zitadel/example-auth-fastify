@@ -51,7 +51,7 @@ export async function build() {
     cookie: {
       httpOnly: true,
       secure: config.SESSION_COOKIE_SECURE,
-      maxAge: config.SESSION_COOKIE_MAX_AGE * 1000,
+      maxAge: config.SESSION_DURATION * 1000,
       path: config.SESSION_COOKIE_PATH,
     },
     salt: config.SESSION_SALT,
