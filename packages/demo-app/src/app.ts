@@ -13,8 +13,7 @@ import Handlebars from 'handlebars';
 import { ZitadelStrategy, ZitadelUser } from 'passport-zitadel';
 import config from './config.js';
 import { fileURLToPath } from 'node:url';
-import { dirname } from 'knip/dist/util/path.js';
-import { join } from 'node:path';
+import { dirname, join } from 'node:path';
 
 const passport = (passportNs as any).default;
 
