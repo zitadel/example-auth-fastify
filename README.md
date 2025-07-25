@@ -131,7 +131,6 @@ Remember to:
 
 ## Resources
 
-- **Example App Repository:** [Link to your future GitHub repository]
 - **Fastify Documentation:** <https://fastify.dev/>
 - **@fastify/passport Documentation:** <https://github.com/fastify/fastify-passport>
 - **@fastify/session Documentation:** <https://github.com/f
