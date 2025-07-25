@@ -14,6 +14,7 @@ import { ZitadelStrategy, ZitadelUser } from 'passport-zitadel';
 import config from './config.js';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { ZITADEL_SCOPES } from './scopes.js';
 
 const passport = (passportNs as any).default;
 
@@ -68,7 +69,7 @@ export async function build() {
     clientId: config.ZITADEL_CLIENT_ID,
     clientSecret: config.ZITADEL_CLIENT_SECRET,
     callbackURL: config.ZITADEL_CALLBACK_URL,
-    scope: 'openid profile email',
+    scope: ZITADEL_SCOPES,
     postLogoutRedirectUrl: config.ZITADEL_POST_LOGOUT_URL,
   });
 
