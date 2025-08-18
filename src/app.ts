@@ -4,12 +4,13 @@ import Fastify from 'fastify';
 import fastifyStatic from '@fastify/static';
 import fastifyCookie from '@fastify/cookie';
 import formbody from '@fastify/formbody';
+import view from '@fastify/view';
+import Handlebars from 'handlebars';
 import path from 'path';
 import config from './config.js';
 import { getMessage } from './auth/message.js';
 import { authConfig, buildLogoutUrl } from './auth/index.js';
 import { requireAuth } from './auth/guard.js';
-import { viewMiddleware } from './middleware/hbs.js';
 import { FastifyAuth, getSession } from '@mridang/fastify-auth';
 
 interface QueryString {
@@ -36,12 +37,19 @@ export async function build(): Promise<FastifyInstance> {
   await app.register(fastifyCookie);
   await app.register(formbody);
 
+  await app.register(view, {
+    engine: {
+      handlebars: Handlebars,
+    },
+    root: path.join(process.cwd(), 'res'),
+    layout: 'main.hbs',
+    viewExt: 'hbs',
+  });
+
   await app.register(fastifyStatic, {
     root: path.join(process.cwd(), 'public'),
     prefix: '/static/',
   });
-
-  await app.register(viewMiddleware);
 
   /**
    * Initiates the logout process by redirecting the user to the external Identity
@@ -211,7 +219,7 @@ export async function build(): Promise<FastifyInstance> {
   /**
    * GET /auth/error
    *
-   * Intercepts authentication-related errors (e.g. AccessDenied, Configuration,
+   * Intercepts authentication-related errors (e.g., AccessDenied, Configuration,
    * Verification) from sign-in or callback flows and shows a friendly error page.
    *
    * @param request  - The Fastify request. May have `request.query.error` set to an
@@ -243,7 +251,7 @@ export async function build(): Promise<FastifyInstance> {
   app.get(
     '/auth/userinfo',
     { preHandler: requireAuth },
-    async (request: FastifyRequest, reply: FastifyReply): Promise<void> => {
+    async (_request: FastifyRequest, reply: FastifyReply): Promise<void> => {
       const session = reply.session;
       if (!session) {
         return reply.status(401).send({ error: 'Unauthorized' });
@@ -304,7 +312,7 @@ export async function build(): Promise<FastifyInstance> {
    */
   app.get(
     '/auth/logout/success',
-    (request: FastifyRequest, reply: FastifyReply) => {
+    (_request: FastifyRequest, reply: FastifyReply) => {
       return reply.view('auth/logout/success');
     },
   );
@@ -403,7 +411,7 @@ export async function build(): Promise<FastifyInstance> {
   app.get(
     '/profile',
     { preHandler: requireAuth },
-    async (request: FastifyRequest, reply: FastifyReply) => {
+    async (_request: FastifyRequest, reply: FastifyReply) => {
       const session = reply.session;
       return reply.view('profile', {
         userJson: JSON.stringify(session, null, 2),
@@ -422,7 +430,7 @@ export async function build(): Promise<FastifyInstance> {
    * @param reply  - Fastify Reply object
    * @returns    void
    */
-  app.setNotFoundHandler((request: FastifyRequest, reply: FastifyReply) => {
+  app.setNotFoundHandler((_request: FastifyRequest, reply: FastifyReply) => {
     return reply.view('not-found', {});
   });
 

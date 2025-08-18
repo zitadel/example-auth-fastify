@@ -1,5 +1,3 @@
-// types/auth-augmentations.d.ts
-
 import type { Session as CoreSession } from '@auth/core';
 import type { JWT as CoreJWT } from '@auth/core/jwt';
 
@@ -33,27 +31,5 @@ declare module '@auth/core/jwt' {
     expiresAt?: number;
     /** Error flag when refresh fails */
     error?: string;
-  }
-}
-
-/**
- * Extend Hono Auth.js AuthUser so .session and .token carry our augmented types.
- */
-declare module '@hono/auth-js/dist/index' {
-  interface AuthUser {
-    /** Extended session with ZITADEL tokens */
-    session: CoreSession & {
-      idToken?: string;
-      accessToken?: string;
-      error?: string;
-    };
-    /** Extended JWT with ZITADEL tokens */
-    token?: CoreJWT & {
-      idToken?: string;
-      accessToken?: string;
-      refreshToken?: string;
-      expiresAt?: number;
-      error?: string;
-    };
   }
 }
