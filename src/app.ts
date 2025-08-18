@@ -1,7 +1,9 @@
+// file: src/app.ts
 import type { FastifyRequest, FastifyReply, FastifyInstance } from 'fastify';
 import Fastify from 'fastify';
 import fastifyStatic from '@fastify/static';
 import fastifyCookie from '@fastify/cookie';
+import formbody from '@fastify/formbody';
 import path from 'path';
 import config from './config.js';
 import { getMessage } from './auth/message.js';
@@ -32,6 +34,7 @@ export async function build(): Promise<FastifyInstance> {
   const app: FastifyInstance = Fastify();
 
   await app.register(fastifyCookie);
+  await app.register(formbody);
 
   await app.register(fastifyStatic, {
     root: path.join(process.cwd(), 'public'),
