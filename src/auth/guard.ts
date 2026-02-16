@@ -1,5 +1,5 @@
 import { FastifyRequest, FastifyReply } from 'fastify';
-import { getSession } from '@mridang/fastify-auth';
+import { getSession } from '@zitadel/fastify-auth';
 import { authConfig } from './index.js';
 
 /**
@@ -17,7 +17,7 @@ import { authConfig } from './index.js';
  * @remarks
  * - Must be used after setting up Auth.js session handling so that request
  *   cookies are parsed.
- * - Relies on getSession() from @mridang/fastify-auth.
+ * - Relies on getSession() from @zitadel/fastify-auth.
  * - Redirects unauthenticated users to
  *   `/auth/signin?callbackUrl=<original URL>`.
  * - Original request URL is URL-encoded in callbackUrl.

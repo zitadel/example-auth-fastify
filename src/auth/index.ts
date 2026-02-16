@@ -6,7 +6,7 @@ import { Account, Profile, Session, User } from '@auth/core/types';
 import { ZITADEL_SCOPES } from './scopes.js';
 import { AdapterUser } from '@auth/core/adapters';
 import config from '../config.js';
-import { FastifyAuthConfig } from '@mridang/fastify-auth';
+import { FastifyAuthConfig } from '@zitadel/fastify-auth';
 
 /**
  * Automatically refreshes an expired access token using the refresh token.
