@@ -11,7 +11,7 @@ import config from './config.js';
 import { getMessage } from './auth/message.js';
 import { authConfig, buildLogoutUrl } from './auth/index.js';
 import { requireAuth } from './auth/guard.js';
-import { FastifyAuth, getSession } from '@mridang/fastify-auth';
+import { FastifyAuth, getSession } from '@zitadel/fastify-auth';
 
 interface QueryString {
   callbackUrl?: string;
