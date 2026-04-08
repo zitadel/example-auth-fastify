@@ -95,9 +95,11 @@ export async function build(): Promise<FastifyInstance> {
    * If validation is successful, it clears the user's session cookies and
    * redirects to a success page. Otherwise, it redirects to an error page.
    *
-   * @param request - The Fastify request object, which contains the request functionality.
-   * @param reply - The Fastify reply object, which contains the response functionality.
-   * @returns A Response object that either redirects the user to a success
+   * @param request - The incoming Fastify request object, which contains the
+   * URL and its search parameters, including the `state` from the IdP.
+   * @param reply - The Fastify reply object, used to send the redirect and
+   * the cookie-clearing headers.
+   * @returns A redirect response that either redirects the user to a success
    * or error page. Upon success, it includes headers to delete session cookies.
    */
   app.get(
@@ -112,6 +114,12 @@ export async function build(): Promise<FastifyInstance> {
 
       if (state && logoutStateCookie && state === logoutStateCookie) {
         reply.header('Clear-Site-Data', '"cookies"');
+        for (const name of Object.keys(request.cookies)) {
+          if (name.includes('authjs.')) {
+            reply.clearCookie(name, { path: '/' });
+          }
+        }
+        reply.clearCookie('logout_state', { path: '/auth/logout/callback' });
         return reply.redirect('/auth/logout/success');
       } else {
         const reason: string = encodeURIComponent(
