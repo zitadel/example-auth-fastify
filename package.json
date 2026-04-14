@@ -1,5 +1,5 @@
 {
-  "name": "example-fastifyjs-auth",
+  "name": "example-fastify-auth",
   "scripts": {
     "prepack": "tsc",
     "start": "tsx watch -r dotenv/config src/index.ts",
