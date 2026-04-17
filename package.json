@@ -23,7 +23,7 @@
     "@auth/core": "^0.40.0",
     "@fastify/cookie": "^11.0.2",
     "@fastify/formbody": "^8.0.2",
-    "@fastify/static": "^8.2.0",
+    "@fastify/static": "^9.1.1",
     "@fastify/view": "^11.1.0",
     "@zitadel/fastify-auth": "^1.0.0",
     "dotenv": "^16.5.0",
