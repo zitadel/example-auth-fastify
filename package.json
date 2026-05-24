@@ -30,7 +30,7 @@
     "fastify": "^5.8.5",
     "handlebars": "^4.7.9",
     "openid-client": "^6.6.4",
-    "qs": "^6.14.2"
+    "qs": "^6.15.2"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^20.5.0",
