@@ -20,17 +20,17 @@
     "node": ">=22.0.0"
   },
   "dependencies": {
-    "@auth/core": "^0.40.0",
+    "@auth/core": "^0.41.3",
     "@fastify/cookie": "^11.0.2",
     "@fastify/formbody": "^8.0.2",
-    "@fastify/static": "^9.1.1",
+    "@fastify/static": "^10.1.2",
     "@fastify/view": "^11.1.0",
     "@zitadel/fastify-auth": "^1.0.0",
     "dotenv": "^16.5.0",
-    "fastify": "^5.8.5",
+    "fastify": "^5.12.3",
     "handlebars": "^4.7.9",
     "openid-client": "^6.6.4",
-    "qs": "^6.15.2"
+    "qs": "^6.16.0"
   },
   "devDependencies": {
     "@commitlint/config-conventional": "^20.5.0",
